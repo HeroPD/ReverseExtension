@@ -97,7 +97,7 @@ extension UITableView {
         
         //MARK: - reachedBottom
         private lazy var _reachedBottom: Bool = {
-            return base.map { $0.contentOffset.y <= 0 } ?? false
+            return self.base.map { $0.contentOffset.y <= 0 } ?? false
         }()
         fileprivate(set) var reachedBottom: Bool {
             set {
@@ -115,7 +115,7 @@ extension UITableView {
         
         //MARK: - reachedTop
         private lazy var _reachedTop: Bool = {
-            return base.map { $0.contentOffset.y >= max(0, $0.contentSize.height - $0.bounds.size.height) } ?? false
+            return self.base.map { $0.contentOffset.y >= max(0, $0.contentSize.height - $0.bounds.size.height) } ?? false
         }()
         fileprivate(set) var reachedTop: Bool {
             set {
@@ -162,11 +162,11 @@ extension UITableView {
             if tableView.transform == CGAffineTransform.identity {
                 tableView.transform = CGAffineTransform.identity.rotated(by: .pi)
             }
-            contentInsetObserver?.didChange = { [weak self] _, _ in
+//            contentInsetObserver?.didChange = { [weak self] _, _ in
                 DispatchQueue.main.async {
-                    self?.configureTableViewInsets()
+                    self.configureTableViewInsets()
                 }
-            }
+//            }
         }
         
         private func configureTableViewInsets() {
